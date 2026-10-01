@@ -1,0 +1,24 @@
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# Salidas de compilación
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# NuGet
+*.nupkg
+packages/
+
+# Otros
+*.log
+.DS_Store
+Thumbs.db
+
+# Enunciados y bitácoras de cada reto (no se suben)
+assets/

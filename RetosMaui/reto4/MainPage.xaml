@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reto4.MainPage"
+             Title="Tic-Tac-Toe">
+
+    <ContentPage.Resources>
+        <!-- Estilo explícito para las casillas: reemplaza el estilo implícito de Button
+             para que los colores de X y O no cambien con los estados visuales -->
+        <Style x:Key="BoardButton" TargetType="Button">
+            <Setter Property="WidthRequest" Value="100" />
+            <Setter Property="HeightRequest" Value="100" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="60" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#D6D6D6, Dark=#4A4A4A}" />
+        </Style>
+
+        <!-- Tarjeta usada por los diálogos personalizados -->
+        <Style x:Key="DialogCard" TargetType="Border">
+            <Setter Property="Margin" Value="32" />
+            <Setter Property="Padding" Value="24" />
+            <Setter Property="MaximumWidthRequest" Value="360" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#2B2B2B}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Game" IconImageSource="new_game.png" Clicked="OnNewGameClicked" />
+        <ToolbarItem Text="Difficulty" IconImageSource="difficulty_level.png" Clicked="OnDifficultyClicked" />
+        <ToolbarItem Text="Quit" IconImageSource="quit_game.png" Clicked="OnQuitClicked" />
+        <ToolbarItem Text="About" IconImageSource="about.png" Clicked="OnAboutClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <!-- Tablero e información del juego -->
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+            <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto"
+                  ColumnSpacing="6" RowSpacing="6" HorizontalOptions="Center">
+                <Button x:Name="One" Grid.Row="0" Grid.Column="0" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Two" Grid.Row="0" Grid.Column="1" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Three" Grid.Row="0" Grid.Column="2" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Four" Grid.Row="1" Grid.Column="0" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Five" Grid.Row="1" Grid.Column="1" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Six" Grid.Row="1" Grid.Column="2" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Seven" Grid.Row="2" Grid.Column="0" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Eight" Grid.Row="2" Grid.Column="1" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+                <Button x:Name="Nine" Grid.Row="2" Grid.Column="2" Style="{StaticResource BoardButton}" Clicked="OnBoardButtonClicked" />
+            </Grid>
+
+            <Label x:Name="InfoLabel" FontSize="20" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <!-- Diálogo de dificultad (selección única) -->
+        <Grid x:Name="DifficultyDialog" IsVisible="False">
+            <BoxView Color="Black" Opacity="0.5">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnDifficultyDialogDismissed" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <Border Style="{StaticResource DialogCard}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Choose a difficulty level:" FontSize="18" FontAttributes="Bold" Margin="0,0,0,8" />
+                    <RadioButton x:Name="EasyRadio" Content="Easy" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <RadioButton x:Name="HarderRadio" Content="Harder" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <RadioButton x:Name="ExpertRadio" Content="Expert" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <Button Text="Cancel" HorizontalOptions="End" Margin="0,8,0,0" Clicked="OnDifficultyDialogDismissed" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Diálogo "Acerca de" (diseño personalizado) -->
+        <Grid x:Name="AboutDialog" IsVisible="False">
+            <BoxView Color="Black" Opacity="0.5" />
+            <Border Style="{StaticResource DialogCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Image Source="about_logo.png" HeightRequest="96" WidthRequest="96" HorizontalOptions="Center" />
+                    <Label Text="Tic-Tac-Toe" FontSize="20" FontAttributes="Bold" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    <Label Text="By Diego Felipe Solorzano Aponte" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    <Label Text="Choose from one of three difficulty levels. Don't let the computer beat you!"
+                           HorizontalTextAlignment="Center" />
+                    <Button Text="OK" HorizontalOptions="Center" WidthRequest="120" Margin="0,8,0,0" Clicked="OnAboutOkClicked" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>
