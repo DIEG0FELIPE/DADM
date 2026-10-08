@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:reto6"
+             x:Class="reto6.MainPage"
+             Title="Tic-Tac-Toe">
+
+    <ContentPage.Resources>
+        <!-- Tarjeta usada por los diálogos personalizados -->
+        <Style x:Key="DialogCard" TargetType="Border">
+            <Setter Property="Margin" Value="32" />
+            <Setter Property="Padding" Value="24" />
+            <Setter Property="MaximumWidthRequest" Value="360" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#2B2B2B}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Game" IconImageSource="new_game.png" Clicked="OnNewGameClicked" />
+        <ToolbarItem Text="Difficulty" IconImageSource="difficulty_level.png" Clicked="OnDifficultyClicked" />
+        <ToolbarItem Text="Reset Scores" IconImageSource="reset_scores.png" Clicked="OnResetScoresClicked" />
+        <ToolbarItem Text="About" IconImageSource="about.png" Clicked="OnAboutClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <!-- Tablero e información del juego. En vertical el tablero queda arriba y la información debajo;
+             en horizontal (ver OnSizeAllocated) el tablero queda a la izquierda y la información a la derecha. -->
+        <Grid x:Name="GameLayout" VerticalOptions="Center" HorizontalOptions="Center"
+              RowSpacing="20" ColumnSpacing="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Tablero dibujado por la vista personalizada -->
+            <local:BoardView x:Name="Board" Grid.Row="0" Grid.Column="0" WidthRequest="300" HeightRequest="300"
+                             Margin="0,5,0,0" StartInteraction="OnBoardTouched" />
+
+            <VerticalStackLayout x:Name="InfoPanel" Grid.Row="1" Grid.Column="0" Spacing="12"
+                                 VerticalOptions="Center" HorizontalOptions="Center">
+                <Label x:Name="InfoLabel" FontSize="20" HorizontalTextAlignment="Center" />
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="20" HorizontalOptions="Center">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="Human" FontSize="14" HorizontalTextAlignment="Center" />
+                        <Label x:Name="HumanScoreLabel" FontSize="24" FontAttributes="Bold" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Ties" FontSize="14" HorizontalTextAlignment="Center" />
+                        <Label x:Name="TieScoreLabel" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="2">
+                        <Label Text="Android" FontSize="14" HorizontalTextAlignment="Center" />
+                        <Label x:Name="ComputerScoreLabel" FontSize="24" FontAttributes="Bold" TextColor="#C80000" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Diálogo de dificultad (selección única) -->
+        <Grid x:Name="DifficultyDialog" IsVisible="False">
+            <BoxView Color="Black" Opacity="0.5">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnDifficultyDialogDismissed" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <Border Style="{StaticResource DialogCard}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Choose a difficulty level:" FontSize="18" FontAttributes="Bold" Margin="0,0,0,8" />
+                    <RadioButton x:Name="EasyRadio" Content="Easy" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <RadioButton x:Name="HarderRadio" Content="Harder" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <RadioButton x:Name="ExpertRadio" Content="Expert" GroupName="Difficulty" CheckedChanged="OnDifficultyChecked" />
+                    <Button Text="Cancel" HorizontalOptions="End" Margin="0,8,0,0" Clicked="OnDifficultyDialogDismissed" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Diálogo "Acerca de" (diseño personalizado) -->
+        <Grid x:Name="AboutDialog" IsVisible="False">
+            <BoxView Color="Black" Opacity="0.5" />
+            <Border Style="{StaticResource DialogCard}">
+                <VerticalStackLayout Spacing="10">
+                    <Image Source="about_logo.png" HeightRequest="96" WidthRequest="96" HorizontalOptions="Center" />
+                    <Label Text="Tic-Tac-Toe" FontSize="20" FontAttributes="Bold" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    <Label Text="By Diego Felipe Solorzano Aponte" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    <Label Text="Choose from one of three difficulty levels. Don't let the computer beat you!"
+                           HorizontalTextAlignment="Center" />
+                    <Button Text="OK" HorizontalOptions="Center" WidthRequest="120" Margin="0,8,0,0" Clicked="OnAboutOkClicked" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>
