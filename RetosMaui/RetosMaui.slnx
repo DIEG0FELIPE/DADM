@@ -1,4 +1,14 @@
 <Solution>
-  <Project Path="reto4/reto4.csproj" />
-  <Project Path="reto5/reto5.csproj" />
+  <Folder Name="/Solution Items/">
+    <File Path="BITACORA_GENERAL.md" />
+  </Folder>
+  <Project Path="reto4/reto4.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="reto5/reto5.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="reto6/reto6.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
