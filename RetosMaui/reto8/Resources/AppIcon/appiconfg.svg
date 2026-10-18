@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- Edificio de oficinas dentro de la zona segura del ícono adaptativo (círculo central) -->
+    <rect x="158" y="128" width="140" height="200" rx="8" fill="#B0BEC5" />
+    <g fill="#263238">
+        <rect x="178" y="148" width="24" height="24" /><rect x="254" y="148" width="24" height="24" />
+        <rect x="178" y="190" width="24" height="24" /><rect x="254" y="190" width="24" height="24" />
+        <rect x="178" y="232" width="24" height="24" /><rect x="254" y="232" width="24" height="24" />
+    </g>
+    <rect x="208" y="278" width="40" height="50" fill="#00C800" />
+</svg>

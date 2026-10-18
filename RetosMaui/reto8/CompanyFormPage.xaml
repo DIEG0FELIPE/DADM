@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:reto8"
+             x:Class="reto8.CompanyFormPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="6">
+            <Label Text="Nombre de la empresa *" FontSize="12" />
+            <Entry x:Name="NameEntry" Placeholder="Nombre" MaxLength="80" />
+
+            <Label Text="Página web" FontSize="12" Margin="0,8,0,0" />
+            <Entry x:Name="WebsiteEntry" Placeholder="https://www.ejemplo.com" Keyboard="Url" />
+
+            <Label Text="Teléfono de contacto" FontSize="12" Margin="0,8,0,0" />
+            <Entry x:Name="PhoneEntry" Placeholder="Teléfono" Keyboard="Telephone" MaxLength="20" />
+
+            <Label Text="Correo electrónico de contacto" FontSize="12" Margin="0,8,0,0" />
+            <Entry x:Name="EmailEntry" Placeholder="contacto@ejemplo.com" Keyboard="Email" />
+
+            <Label Text="Productos y servicios" FontSize="12" Margin="0,8,0,0" />
+            <Editor x:Name="ProductsEditor" Placeholder="Describa los productos y servicios que ofrece"
+                    AutoSize="TextChanges" MinimumHeightRequest="100" />
+
+            <Label Text="Clasificación * (una o varias)" FontSize="12" Margin="0,8,0,0" />
+            <FlexLayout Wrap="Wrap">
+                <local:CheckOption x:Name="ConsultingOption" />
+                <local:CheckOption x:Name="CustomOption" />
+                <local:CheckOption x:Name="FactoryOption" />
+            </FlexLayout>
+
+            <Label x:Name="ErrorLabel" TextColor="#C62828" IsVisible="False" Margin="0,4,0,0" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,12,0,0">
+                <Button Grid.Column="0" Text="Cancelar" Clicked="OnCancelClicked"
+                        BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#505050}"
+                        TextColor="{AppThemeBinding Light=#212121, Dark=White}" />
+                <Button Grid.Column="1" x:Name="SaveButton" Text="Guardar" Clicked="OnSaveClicked" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

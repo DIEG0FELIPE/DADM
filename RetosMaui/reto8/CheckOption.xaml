@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Casilla con su texto al lado; tocar el texto también la marca. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reto8.CheckOption">
+
+    <HorizontalStackLayout Spacing="2" VerticalOptions="Center">
+        <CheckBox x:Name="Box" VerticalOptions="Center" CheckedChanged="OnBoxCheckedChanged" />
+        <Label x:Name="Caption" VerticalOptions="Center" Margin="0,0,12,0">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCaptionTapped" />
+            </Label.GestureRecognizers>
+        </Label>
+    </HorizontalStackLayout>
+
+</ContentView>

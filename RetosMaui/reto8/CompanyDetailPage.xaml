@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reto8.CompanyDetailPage"
+             Title="Empresa">
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Editar" IconImageSource="edit.png" Clicked="OnEditClicked" />
+        <ToolbarItem Text="Eliminar" IconImageSource="delete.png" Clicked="OnDeleteClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="4">
+            <Label x:Name="NameLabel" FontSize="26" FontAttributes="Bold" />
+            <Label x:Name="TypesLabel" FontSize="15" Margin="0,0,0,16"
+                   TextColor="{AppThemeBinding Light=#1E6FD9, Dark=#6FA8FF}" />
+
+            <Label Text="Página web" FontSize="12" />
+            <Label x:Name="WebsiteLabel" FontSize="17" Margin="0,0,0,12" />
+
+            <Label Text="Teléfono de contacto" FontSize="12" />
+            <Label x:Name="PhoneLabel" FontSize="17" Margin="0,0,0,12" />
+
+            <Label Text="Correo electrónico de contacto" FontSize="12" />
+            <Label x:Name="EmailLabel" FontSize="17" Margin="0,0,0,12" />
+
+            <Label Text="Productos y servicios" FontSize="12" />
+            <Label x:Name="ProductsLabel" FontSize="17" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

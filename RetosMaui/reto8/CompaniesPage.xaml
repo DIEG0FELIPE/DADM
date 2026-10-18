@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:reto8"
+             x:Class="reto8.CompaniesPage"
+             Title="Directorio de empresas">
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" IconImageSource="add.png" Clicked="OnAddClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16,8" RowSpacing="4">
+        <!-- Filtro por nombre -->
+        <SearchBar Grid.Row="0" x:Name="NameSearch" Placeholder="Buscar por nombre" TextChanged="OnFilterChanged" />
+
+        <!-- Filtro por clasificación: muestra las empresas que tengan alguna de las marcadas -->
+        <VerticalStackLayout Grid.Row="1" Spacing="0">
+            <Label Text="Clasificación" FontSize="12" Margin="4,0,0,0" />
+            <FlexLayout Wrap="Wrap">
+                <local:CheckOption x:Name="ConsultingFilter" CheckedChanged="OnFilterChanged" />
+                <local:CheckOption x:Name="CustomFilter" CheckedChanged="OnFilterChanged" />
+                <local:CheckOption x:Name="FactoryFilter" CheckedChanged="OnFilterChanged" />
+            </FlexLayout>
+        </VerticalStackLayout>
+
+        <Label Grid.Row="2" x:Name="CountLabel" FontSize="12" Margin="4,4,0,4" />
+
+        <Grid Grid.Row="3">
+            <CollectionView x:Name="CompaniesList" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Company">
+                        <Border Margin="0,0,0,10" Padding="16,12" StrokeShape="RoundRectangle 12"
+                                Stroke="{AppThemeBinding Light=#D0D0D0, Dark=#505050}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCompanyTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="{Binding ClassificationText}" FontSize="13"
+                                       TextColor="{AppThemeBinding Light=#1E6FD9, Dark=#6FA8FF}" />
+                                <Label Text="{Binding Phone}" FontSize="13" IsVisible="{Binding HasPhone}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Se muestra cuando no hay empresas que listar -->
+            <Label x:Name="EmptyLabel" IsVisible="False" HorizontalTextAlignment="Center"
+                   VerticalOptions="Center" Margin="24" />
+        </Grid>
+    </Grid>
+
+</ContentPage>
