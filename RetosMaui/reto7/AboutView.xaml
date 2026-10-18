@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Diálogo "Acerca de" (diseño personalizado). Se usa en la lista de juegos y en el tablero. -->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reto7.AboutView"
+             IsVisible="False">
+
+    <ContentView.Resources>
+        <!-- Tarjeta usada por el diálogo -->
+        <Style x:Key="DialogCard" TargetType="Border">
+            <Setter Property="Margin" Value="32" />
+            <Setter Property="Padding" Value="24" />
+            <Setter Property="MaximumWidthRequest" Value="360" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#2B2B2B}" />
+        </Style>
+    </ContentView.Resources>
+
+    <Grid>
+        <BoxView Color="Black" Opacity="0.5" />
+        <Border Style="{StaticResource DialogCard}">
+            <VerticalStackLayout Spacing="10">
+                <Image Source="about_logo.png" HeightRequest="96" WidthRequest="96" HorizontalOptions="Center" />
+                <Label Text="Tic-Tac-Toe Online" FontSize="20" FontAttributes="Bold" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                <Label Text="By Diego Felipe Solorzano Aponte" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                <Label Text="Create a game or join one from the list and play against another person on their own device."
+                       HorizontalTextAlignment="Center" />
+                <Button Text="OK" HorizontalOptions="Center" WidthRequest="120" Margin="0,8,0,0" Clicked="OnOkClicked" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+
+</ContentView>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:reto7"
+             x:Class="reto7.LobbyPage"
+             Title="Tic-Tac-Toe">
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Change name" IconImageSource="change_name.png" Clicked="OnChangeNameClicked" />
+        <ToolbarItem Text="About" IconImageSource="about.png" Clicked="OnAboutClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label x:Name="PlayerLabel" FontSize="14" />
+                <Label Text="Available games" FontSize="22" FontAttributes="Bold" />
+            </VerticalStackLayout>
+
+            <!-- Juegos que esperan un invitado -->
+            <RefreshView Grid.Row="1" x:Name="Refresher" Refreshing="OnRefreshing">
+                <CollectionView x:Name="GamesList" SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Label Text="No games available right now. Create one and wait for an opponent!"
+                               HorizontalTextAlignment="Center" VerticalOptions="Center" Margin="24" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:OnlineGame">
+                            <Border Margin="0,0,0,10" Padding="16,12" StrokeShape="RoundRectangle 12"
+                                    Stroke="{AppThemeBinding Light=#D0D0D0, Dark=#505050}">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                        <Label Text="{Binding Host.Name}" FontSize="18" FontAttributes="Bold" />
+                                        <Label Text="is waiting for an opponent" FontSize="12" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="1" Text="Join" WidthRequest="90" Clicked="OnJoinClicked" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <Button Grid.Row="2" x:Name="CreateButton" Text="Create game" Clicked="OnCreateClicked" />
+        </Grid>
+
+        <local:AboutView x:Name="AboutDialog" />
+    </Grid>
+
+</ContentPage>

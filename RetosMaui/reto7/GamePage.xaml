@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:reto7"
+             x:Class="reto7.GamePage"
+             Title="Tic-Tac-Toe">
+
+    <!-- Menú de opciones -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="NewGameItem" Text="New Game" IconImageSource="new_game.png" Clicked="OnNewGameClicked" />
+        <ToolbarItem Text="Leave game" IconImageSource="leave_game.png" Clicked="OnLeaveGameClicked" />
+        <ToolbarItem Text="About" IconImageSource="about.png" Clicked="OnAboutClicked" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <!-- Tablero e información del juego. En vertical el tablero queda arriba y la información debajo;
+             en horizontal (ver OnSizeAllocated) el tablero queda a la izquierda y la información a la derecha. -->
+        <Grid x:Name="GameLayout" VerticalOptions="Center" HorizontalOptions="Center"
+              RowSpacing="20" ColumnSpacing="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Tablero dibujado por la vista personalizada -->
+            <local:BoardView x:Name="Board" Grid.Row="0" Grid.Column="0" WidthRequest="300" HeightRequest="300"
+                             Margin="0,5,0,0" StartInteraction="OnBoardTouched" />
+
+            <VerticalStackLayout x:Name="InfoPanel" Grid.Row="1" Grid.Column="0" Spacing="12"
+                                 VerticalOptions="Center" HorizontalOptions="Center">
+                <Label x:Name="RoleLabel" FontSize="14" HorizontalTextAlignment="Center" />
+                <ActivityIndicator x:Name="WaitingIndicator" IsRunning="False" IsVisible="False"
+                                   HeightRequest="28" WidthRequest="28" />
+                <Label x:Name="InfoLabel" FontSize="20" HorizontalTextAlignment="Center" />
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="20" HorizontalOptions="Center">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="You" FontSize="14" HorizontalTextAlignment="Center" />
+                        <Label x:Name="MyScoreLabel" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#00C800" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="Ties" FontSize="14" HorizontalTextAlignment="Center" />
+                        <Label x:Name="TieScoreLabel" Text="0" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="2">
+                        <Label x:Name="OpponentNameLabel" Text="Opponent" FontSize="14" HorizontalTextAlignment="Center"
+                               LineBreakMode="TailTruncation" MaximumWidthRequest="110" />
+                        <Label x:Name="OpponentScoreLabel" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#C80000" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+
+        <local:AboutView x:Name="AboutDialog" />
+    </Grid>
+
+</ContentPage>
