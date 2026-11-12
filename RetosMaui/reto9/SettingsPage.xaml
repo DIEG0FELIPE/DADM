@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="reto9.SettingsPage"
+             Title="Ajustes">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="8">
+
+            <Label Text="Radio de búsqueda" FontAttributes="Bold" FontSize="18" />
+            <Label Text="Se muestran los lugares que estén a esta distancia o menos del punto de búsqueda."
+                   FontSize="13"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Margin="0,8,0,0">
+                <Slider x:Name="RadiusSlider" ValueChanged="OnRadiusChanged" VerticalOptions="Center" />
+                <Label x:Name="RadiusLabel" Grid.Column="1" FontAttributes="Bold" FontSize="18"
+                       WidthRequest="80" HorizontalTextAlignment="End" VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnDefinitions="*,*">
+                <Label x:Name="MinLabel" FontSize="12" />
+                <Label x:Name="MaxLabel" Grid.Column="1" FontSize="12" HorizontalTextAlignment="End" Margin="0,0,92,0" />
+            </Grid>
+
+            <Label Text="Lugares que se muestran" FontAttributes="Bold" FontSize="18" Margin="0,24,0,0" />
+            <Label Text="El color es el del marcador en el mapa."
+                   FontSize="13"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+
+            <VerticalStackLayout x:Name="CategoriesList" Margin="0,8,0,0" />
+
+            <Button Text="Restablecer valores" Margin="0,24,0,0" Clicked="OnResetClicked"
+                    BackgroundColor="Transparent" BorderWidth="1"
+                    BorderColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

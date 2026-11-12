@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:reto9.Models"
+             x:Class="reto9.PlacesPage"
+             Title="Lugares cercanos">
+
+    <Grid RowDefinitions="Auto,*">
+        <Label x:Name="CountLabel" Padding="16,12,16,4" FontSize="13"
+               TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+
+        <CollectionView x:Name="PlacesView" Grid.Row="1"
+                        SelectionMode="Single" SelectionChanged="OnPlaceSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:PointOfInterest">
+                    <Grid Padding="16,10" ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Ellipse Fill="{Binding CategoryBrush}" WidthRequest="14" HeightRequest="14" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Text="{Binding Name}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding Summary}" FontSize="13"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

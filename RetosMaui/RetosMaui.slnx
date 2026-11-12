@@ -17,4 +17,7 @@
   <Project Path="reto8/reto8.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
+  <Project Path="reto9/reto9.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
